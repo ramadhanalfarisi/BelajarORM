@@ -1,0 +1,52 @@
+{
+  "name": "belajarorm",
+  "version": "1.0.0",
+  "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "debug": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ramadhanalfarisi@bitbucket.org/ramadhanalfarisi/belajar-orm.git"
+  },
+  "author": "Ramadhan",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/ramadhanalfarisi/belajar-orm#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.0",
+    "moment": "^2.24.0",
+    "multer": "^1.4.2",
+    "multiparty": "^4.2.1",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5",
+    "node-cron": "^2.0.3",
+    "nodemon": "^1.19.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "python": "0.0.4",
+    "sequelize": "^5.9.0",
+    "sequelize-paginate": "^1.1.6"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^5.5.1",
+    "standard": "^12.0.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*"
+    ],
+    "delay": "2500"
+  }
+}
