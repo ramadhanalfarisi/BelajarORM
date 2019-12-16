@@ -30,3 +30,57 @@ exports.createCategory = async (req,res) => {
         param: ''
     }])
 }
+
+exports.readCategory = async (req,res) => {
+
+    let categoryService = new CategoryService()
+
+    let data = await categoryService.readCategory()
+
+    let response = new Response(res)
+    return response.success(data,[{
+        value: '',
+        msg: 'success read category',
+        param: ''
+    }])
+}
+
+exports.updateCategory = async (req,res) => {
+
+    const error = validationResult(req)
+    if (!error.isEmpty()){
+        let response = new Response(res)
+        return response.failed(
+            error.array(),
+            422
+        )
+    }
+
+    let categoryService = new CategoryService()
+
+    let data = await categoryService.updateCategory({
+        name: req.body.name,
+        slug: req.body.slug
+    },req.params.id)
+
+    let response = new Response(res)
+    return response.success(data,[{
+        value: '',
+        msg: 'success update category',
+        param: ''
+    }])
+}
+
+exports.deleteCategory = async (req,res) => {
+
+    let categoryService = new CategoryService()
+
+    let data = await categoryService.deleteCategory(req.params.id)
+
+    let response = new Response(res)
+    return response.success(data,[{
+        value: '',
+        msg: 'success delete category',
+        param: ''
+    }])
+}
