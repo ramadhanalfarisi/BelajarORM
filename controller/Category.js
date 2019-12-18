@@ -2,7 +2,7 @@ const CategoryService = require('../service/CategoryService')
 const Response = require('../helper/response')
 const { validationResult } = require('express-validator')
 
-exports.createCategory = async (req,res) => {
+exports.createCategory = async function (req,res) {
     const error = validationResult(req)
     if (!error.isEmpty()){
         let response = new Response(res)
@@ -31,7 +31,7 @@ exports.createCategory = async (req,res) => {
     }])
 }
 
-exports.readCategory = async (req,res) => {
+exports.readCategory = async function (req,res) {
 
     let categoryService = new CategoryService()
 
@@ -45,7 +45,7 @@ exports.readCategory = async (req,res) => {
     }])
 }
 
-exports.updateCategory = async (req,res) => {
+exports.updateCategory = async function (req,res) {
 
     const error = validationResult(req)
     if (!error.isEmpty()){
@@ -71,7 +71,7 @@ exports.updateCategory = async (req,res) => {
     }])
 }
 
-exports.deleteCategory = async (req,res) => {
+exports.deleteCategory = async function (req,res) {
 
     let categoryService = new CategoryService()
 

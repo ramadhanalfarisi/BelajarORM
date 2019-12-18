@@ -12,12 +12,12 @@ CategoryService.prototype = {
      * @returns Array|Object
      */
 
-     createCategory : async (data) => {
+     createCategory : async function (data) {
          let category = await Category.create(data)
          return category
      },
 
-     readCategory : async () => {
+     readCategory : async function () {
         let category = await Category.findAll({
             include: [{
                 model: Model.Article,
@@ -26,7 +26,7 @@ CategoryService.prototype = {
         return category
     },
 
-    updateCategory : async (data,id) => {
+    updateCategory : async function (data,id) {
         let category = await Category.update(data,{
             where:{
                 id:id
@@ -35,7 +35,7 @@ CategoryService.prototype = {
         return category
     },
 
-    deleteCategory : async (id) => {
+    deleteCategory : async function (id) {
         let category = await Category.destroy({
             where:{
                 id:id
