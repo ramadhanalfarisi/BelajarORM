@@ -13,15 +13,17 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 
 exports.registerAkun = async function (req,res){
-    const error = validationResult(res)
-    if(!error.isEmpty()){
+    const error = validationResult(req)
+    if (!error.isEmpty()){
         let response = new Response(res)
-        return response.failed(error.array(),422)
+        return response.failed(
+            error.array(),
+            422
+        )
     }
 
     const password = bcrypt.hashSync(req.body.password,10)
-    const {email,username} = req.body
-    const role = 'User'
+    const {email,username,role} = req.body
 
     let User = new UserService()
 
@@ -42,4 +44,60 @@ exports.registerAkun = async function (req,res){
         msg: 'success register user',
         param: ''
     }])
+}
+
+exports.login = async function(req,res,) {
+    let error = validationResult(req)
+    if(!error.isEmpty()){
+        let response = new Response()
+        return response.failed(error.array(),422)
+    }
+
+    let User = new UserService()
+
+    let strategy = new JwtStrategy(opts,function(payload,next){
+        let user = User.login({id: payload.id})
+
+        if(user){
+            next(null,user)
+        }else{
+            next(null,false)
+        }
+    })
+
+    passport.use(strategy)
+    const{email,password} = req.body
+
+    if(email && password){
+        let user = await User.login({email:email})
+        if(!user){
+            res.status(401).json({message: 'Akun tidak ada'})
+        }
+        bcrypt.compare(password,user.password,function(err,exist){
+            if(exist){
+                let payload = {
+                    id : user.id
+                }
+                let token = jwt.sign(payload,opts.secretOrKey)
+                let response = new Response(res)
+                return response.success({
+                    token: token,
+                    email: user.email,
+                    role: user.role
+                },[{
+                    value:'',
+                    msg:'berhasil login',
+                    param:''
+                }])
+            }else{
+                console.log(err)
+                let response = new Response(res)
+                return response.failed([{
+                    value: password,
+                    msg: 'password salah',
+                    param: 'password'
+                }],422)
+            }
+        })
+    }
 }
