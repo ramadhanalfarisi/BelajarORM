@@ -5,7 +5,7 @@ const User = require('../models').User
 const Response = require('../helper/response')
 require('dotenv').config()
 var opts = {}
-opts.jwrFromRequest = Extractjwt.fromAuthHeaderAsBearerToken()
+opts.jwtFromRequest = Extractjwt.fromAuthHeaderAsBearerToken()
 opts.secretOrKey = process.env.JWT_SECRET
 
 module.exports = function(req,res,next){
@@ -16,7 +16,7 @@ module.exports = function(req,res,next){
             }
         }).then(function(res,err){
             if(err){
-                return  done(err,false,false)
+                return done(err,false,false)
             }
             return done(null,res)
         })
@@ -27,7 +27,7 @@ module.exports = function(req,res,next){
             console.log(err)
         }
         console.log(user.role)
-        if(user){
+        if(user.role === 'user'){
             return next()
         }
         let response = new Response(res)

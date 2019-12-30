@@ -35,14 +35,15 @@ exports.readCategory = async function (req,res) {
 
     let categoryService = new CategoryService()
 
-    let data = await categoryService.readCategory()
-
+    let data = await categoryService.readCategory(req,res)
+    let dataCategory = data.category.rows
+    let pagination = data.paginationRes
     let response = new Response(res)
-    return response.success(data,[{
+    return response.success(dataCategory,[{
         value: '',
         msg: 'success read category',
         param: ''
-    }])
+    }],200,pagination)
 }
 
 exports.updateCategory = async function (req,res) {

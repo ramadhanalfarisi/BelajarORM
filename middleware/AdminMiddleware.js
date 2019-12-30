@@ -27,7 +27,7 @@ module.exports = function(req,res,next){
             console.log(err)
         }
         console.log(user.role)
-        if(user.role === 'Admin'){
+        if(user.role === 'admin'){
             return next()
         }
         let response = new Response(res)
