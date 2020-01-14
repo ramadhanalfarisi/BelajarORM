@@ -6,8 +6,6 @@ module.exports = {
             check('id_user','field id_user harus terisi').not().isEmpty(),
             check('title','field title harus terisi').not().isEmpty(),
             check('content','field content harus terisi').not().isEmpty(),
-            check('slug','field slug harus terisi').not().isEmpty(),
-            check('slug','field slug harus lower case').isLowercase(),
             check('categories','field categories harus terisi').not().isEmpty()
         ]
     },
@@ -16,8 +14,6 @@ module.exports = {
         return[
             check('title','field title harus terisi').not().isEmpty(),
             check('content','field content harus terisi').not().isEmpty(),
-            check('slug','field slug harus terisi').not().isEmpty(),
-            check('slug','field slug harus lower case').isLowercase(),
             check('categories','field categories harus terisi').not().isEmpty()
         ]
     }

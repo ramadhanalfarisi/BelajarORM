@@ -1,6 +1,7 @@
 const CategoryService = require('../service/CategoryService')
 const Response = require('../helper/response')
 const { validationResult } = require('express-validator')
+const slugify = require('../helper/slugmaker')
 
 exports.createCategory = async function (req,res) {
     const error = validationResult(req)
@@ -13,10 +14,10 @@ exports.createCategory = async function (req,res) {
     }
 
     let categoryService = new CategoryService()
-
+    let slug = slugify.makeSlug(req.body.name)
     let data = await categoryService.createCategory({
         name: req.body.name,
-        slug: req.body.slug
+        slug: slug
     })
 
     let response = new Response(res)

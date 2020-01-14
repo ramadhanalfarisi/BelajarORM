@@ -2,6 +2,7 @@ const ArticleService = require('../service/ArticleService')
 const CategoryArticleService = require('../service/CategoryArticleService')
 const { validationResult } = require('express-validator')
 const Response = require('../helper/response')
+const slugify = require('../helper/slugmaker')
 
 exports.readArticle = async function (req, res) {
     let Article = new ArticleService()
@@ -54,7 +55,8 @@ exports.createArticle = async function (req, res) {
 
     let Article = new ArticleService()
     let CategoryArticle = new CategoryArticleService()
-    let { id_user, title, content, slug, categories } = req.body
+    let { id_user, title, content, categories } = req.body
+    let slug = slugify.makeSlug(title)
     let data = await Article.createArticle({
         id_user: id_user,
         title: title,
