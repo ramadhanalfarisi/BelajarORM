@@ -1,7 +1,7 @@
 const slugify = require('slugify')
 
 module.exports = {
-    makeSlug : (text) => {
+    makeSlug : function (text) {
         const slug = slugify(text, {
             replacement: '-',
             remove: null,

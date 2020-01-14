@@ -18,6 +18,10 @@ CategoryService.prototype = {
         return category
     },
 
+    findOneCategory: async function(data){
+        let category = await Category.findOne(data)
+        return category
+    },
     readCategory: async function (req,res) {
         let limit = req.query.limit || HRISConfigs.data.limit_pagination
         let page = req.query.page > 0 ? req.query.page : 1
